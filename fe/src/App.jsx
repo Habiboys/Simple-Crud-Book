@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 // import './App.css'
 
+const API_BASE_URL = 'http://localhost:3000';
+
 function App() {
   const [buku, setBuku] = useState([]);
   const [judul, setJudul] = useState('');
@@ -11,7 +13,7 @@ function App() {
 
 
   useEffect(()=>{
-    fetch('http://localhost:3000/buku')
+    fetch(`${API_BASE_URL}/buku`)
     .then(res=>res.json())
     .then(data=>{
       console.log('hasil fetch: ', data);
@@ -22,7 +24,7 @@ function App() {
   const handleSubmit =(e)=>{
     e.preventDefault();
     const method = editId ? 'PUT' : 'POST';
-    const url = editId ? `http://localhost:3000/buku/${editId}`:   'http://localhost:3000/buku' ;
+    const url = editId ? `${API_BASE_URL}/buku/${editId}` : `${API_BASE_URL}/buku`;
 
     fetch(url, {
       method,
@@ -59,7 +61,7 @@ function App() {
   }
 
   const handleDelete= (id) =>{
-    fetch(`http://localhost:3000/buku/${id}` ,{
+    fetch(`${API_BASE_URL}/buku/${id}` ,{
       method: 'DELETE'
     })
     .then(res=>res.json())
